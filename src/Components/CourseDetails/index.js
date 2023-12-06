@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
 // import TechEra from '../TechEra'
-import CourseItem from '../CourseItem'
+// import CourseItem from '../CourseItem'
 import './index.css'
 
 const apiStatusConstants = {
@@ -44,7 +44,7 @@ class CourseDetails extends Component {
     }
     this.setState({
       courseData: UpdatedData,
-      // apiStatus: apiStatusConstants.success,
+      apiStatus: apiStatusConstants.success, // updated
     })
   }
 
@@ -81,12 +81,15 @@ class CourseDetails extends Component {
 
   OnRenderingSuccess = () => {
     const {courseData} = this.state
+    const {name, imageUrl, description} = courseData
     return (
-      <ul className="course-details-ul">
-        {courseData.map(each => (
-          <CourseItem key={each.id} CourseDetailsItem={each} />
-        ))}
-      </ul>
+      <div className="courses-details-container">
+        <img src={imageUrl} alt={name} className="course-details-image" />
+        <div className="courses-details">
+          <h1 className="courses-details-heading">{name}</h1>
+          <p className="courses-details-description">{description}</p>
+        </div>
+      </div>
     )
   }
 
